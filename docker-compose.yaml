@@ -1,0 +1,15 @@
+services:
+  java-e2e-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - HEADLESS_BROWSER=false
+      - SELENIUM_BASE_URL="https://testoutlivecontent.blob.core.windows.net"
+    volumes:
+      - /dev/shm:/dev/shm
+      - ./:/app
+    ports:
+      - "55005:55005"
+    command: ["sleep", "infinity"]
+
