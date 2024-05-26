@@ -10,7 +10,7 @@ Watch the [YouTube Video](https://youtu.be/0duadxJvgX0)
 
 ## How to run tests
 
-```HEADLESS=false mvn test```
+```HEADLESS_BROWSER=false mvn test```
 
 ### Created a Development Docker
 
