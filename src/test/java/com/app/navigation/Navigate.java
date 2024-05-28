@@ -2,14 +2,11 @@ package com.app.navigation;
 
 import com.app.pages.*;
 
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 
 public class Navigate {
     private WebDriver driver;
-    private WebDriverWait wait;
     private String baseUrl;
 
     public Navigate() {
@@ -18,26 +15,28 @@ public class Navigate {
         if (this.baseUrl == null || this.baseUrl.trim().isEmpty()) {
             this.baseUrl = "https://testoutlivecontent.blob.core.windows.net";
         }
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
     }
 
-    public void homePage(HomePageCallback callback) {
-        goTo("/netpro2018v5-en-us/en-us/sims/typescriptv1/netpro2018v5/simstartup_webpack.html?package=netpro2018v5windowspackage&sim=ipademail_np5&dev=true&automation=true");
-        HomePage homePage = new HomePage(this.driver, this.wait);
-        homePage.pageLoaded();
-        callback.execute(homePage);
+    public void homePage(PageCallback<HomePage> callback) {
+        loadPage(HomePage.class, callback);
     }
 
-    public void settingsPage(SettingsPageCallback callback) {
-        SettingsPage settingsPage = new SettingsPage(this.driver, this.wait);
-        settingsPage.pageLoaded();
-        callback.execute(settingsPage);
+    public void settingsPage(PageCallback<SettingsPage> callback) {
+        loadPage(SettingsPage.class, callback);
     }
 
-    public void labPage(LabPageCallback callback) {
-        LabPage labPage = new LabPage(this.driver, this.wait);
-        labPage.pageLoaded();
-        callback.execute(labPage);
+    public void labPage(PageCallback<LabPage> callback) {
+        loadPage(LabPage.class, callback);
+    }
+
+    public <T extends BasePage> void loadPage(Class<T> pageClass, PageCallback<T> callback) {
+        T page = PageFactory.initElements(driver, pageClass);
+        page.pageLoaded();
+        callback.execute(page);
+    }
+
+    public interface PageCallback<T> {
+        void execute(T page);
     }
 
     public void goTo(String path) {
@@ -56,15 +55,4 @@ public class Navigate {
         driver.navigate().refresh();
     }
 
-    public interface HomePageCallback {
-        void execute(HomePage homePage);
-    }
-
-    public interface SettingsPageCallback {
-        void execute(SettingsPage settingsPage);
-    }
-
-    public interface LabPageCallback {
-        void execute(LabPage labPage);
-    }
 }
