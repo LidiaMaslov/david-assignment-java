@@ -12,8 +12,8 @@ public class LabPage extends BasePage {
     private By buttonDone = By.id("bDone");
     private By textNodeScore = By.xpath("//div[contains(text(), 'Your Score:')]");
 
-    public LabPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public LabPage(WebDriver driver) {
+        super(driver);
     }
 
     public void pageLoaded() {

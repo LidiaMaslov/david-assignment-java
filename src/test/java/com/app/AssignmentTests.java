@@ -11,6 +11,7 @@ public class AssignmentTests {
     public void main() {
         Navigate nav = new Navigate();
 
+        nav.goTo("/netpro2018v5-en-us/en-us/sims/typescriptv1/netpro2018v5/simstartup_webpack.html?package=netpro2018v5windowspackage&sim=ipademail_np5&dev=true&automation=true");
         nav.homePage((homePage) -> {
             homePage.desktopIcon("Settings").click();
         });

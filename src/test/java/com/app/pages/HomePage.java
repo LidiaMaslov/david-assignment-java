@@ -12,8 +12,8 @@ import com.app.components.DesktopIconComponent;
 public class HomePage extends BasePage {
     private By desktopContainer = By.id("Desktop");
 
-    public HomePage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     public void pageLoaded() {
@@ -22,7 +22,7 @@ public class HomePage extends BasePage {
     }
 
     public DesktopIconComponent desktopIcon(String name) {
-        DesktopIconComponent desktopIconComponent = new DesktopIconComponent(driver, wait, name);
+        DesktopIconComponent desktopIconComponent = new DesktopIconComponent(driver, name);
         return desktopIconComponent;
     }
 }

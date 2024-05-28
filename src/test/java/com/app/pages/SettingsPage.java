@@ -1,5 +1,7 @@
 package com.app.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,13 +22,14 @@ public class SettingsPage extends BasePage {
     private SubMenuFinder subMenuFinder;
     private MainMenuFinder mainMenuFinder;
 
-    public SettingsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public SettingsPage(WebDriver driver) {
+        super(driver);
         subMenuFinder = new SubMenuFinder(driver);
         mainMenuFinder = new MainMenuFinder(driver);
     }
 
     public void pageLoaded() {
+        WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOfElementLocated(menuMailContactsCalendars));
     }
 
